@@ -6,7 +6,7 @@
 /*   By: chpark <chpark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 22:09:40 by chpark            #+#    #+#             */
-/*   Updated: 2021/09/21 22:19:30 by chpark           ###   ########.fr       */
+/*   Updated: 2021/09/21 22:41:26 by chpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,29 +68,37 @@ int	ft_check_error(char *base)
 	return (1);
 }
 
+void	ft_trance_nbr(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		str[i] = str[i] + 48;
+		i++;
+	}
+	return (str);
+}
+
 void	ft_atoi_base(char *str, char *base)
 {
-	int	bl;
-	int	error;
+	long	*n;
+	int		bl;
 
 	bl = 0;
-	error = 0;
-	nb = nbr;
+	ft_trance_nbr(str);
+	*n = *str;
 	if (ft_check_error(base))
 	{
-		if (nb < 0)
-		{
-			ft_putchar('-');
-			nb *= -1;
-		}
 		while (base[bl])
 			bl++;
-		if (nb < bl)
+		if (n < bl)
 			ft_putchar(base[nb]);
-		if (nb >= bl)
+		if (n >= bl)
 		{
-			ft_putnbr_base(nb / bl, base);
-			ft_putnbr_base(nb % bl, base);
+			ft_atoi_base(n / bl, base);
+			ft_atoi_base(n % bl, base);
 		}
 	}
 }
