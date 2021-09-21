@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
+/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chpark <chpark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/21 21:23:28 by chpark            #+#    #+#             */
-/*   Updated: 2021/09/21 22:23:34 by chpark           ###   ########.fr       */
+/*   Created: 2021/09/21 22:09:40 by chpark            #+#    #+#             */
+/*   Updated: 2021/09/21 22:19:30 by chpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,32 @@
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
+}
+
+int	ft_atoi(char *str)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (str[i] < '0' || '9' < str[i])
+	{
+		if (str[i] == '-')
+			count++;
+		i++;
+	}
+	if ((count % 2) != 0)
+		ft_putchar('-');
+	while (str[i] != '\0')
+	{
+		if ('0' <= str[i] && str[i] <= '9')
+			ft_putchar(str[i]);
+		if ('0' > str[i] || str[i] > '9')
+			return (0);
+		i++;
+	}
+	return (0);
 }
 
 int	ft_check_error(char *base)
@@ -42,12 +68,13 @@ int	ft_check_error(char *base)
 	return (1);
 }
 
-void	ft_putnbr_base(int nbr, char *base)
+void	ft_atoi_base(char *str, char *base)
 {
-	long	nb;
-	int		bl;
+	int	bl;
+	int	error;
 
 	bl = 0;
+	error = 0;
 	nb = nbr;
 	if (ft_check_error(base))
 	{
